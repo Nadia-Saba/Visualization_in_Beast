@@ -87,7 +87,7 @@ class IntermediateTile(resolution: Int) extends Serializable {
     }
 
     // TODO aggregate additional attributes when rasterizing features
-    val additionalAttr = new ArrayBuffer[Polygon]()
+   
   }
 
   /**
@@ -238,6 +238,7 @@ class IntermediateTile(resolution: Int) extends Serializable {
 
       }
       rings.toArray
+      // convert rings to polygons
       val createdPolygons = ArrayBuffer[Polygon]()
       for(ring<- rings){
         createdPolygons.append(factory.createPolygon(ring,null))
@@ -257,8 +258,6 @@ class IntermediateTile(resolution: Int) extends Serializable {
 object IntermediateTile {
   /** The maximum number of points in one vector tile before we decide to rasterize */
   //val maxPointsPerTile: Long = 1000000000000L
-
-
-  val maxPointsPerTile: Long = 50L
+   val maxPointsPerTile: Long = 50L
 }
 case class Node(x: Int, y: Int, var next: Node, var visited: Boolean = false)
